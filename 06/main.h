@@ -9,12 +9,4 @@
 #include <fstream>
 using namespace std;
 
-struct Seat {
-    int column;
-    int row;
-    int id();
-};
-
-Seat getSeat(string input);
-
 #endif //ADVENTOFCODE2020_MAIN_H
