@@ -9,6 +9,4 @@
 #include <fstream>
 using namespace std;
 
-const string alphabeta = "abcdefghijklmnopqrstuvwxyz";
-
 #endif //ADVENTOFCODE2020_MAIN_H

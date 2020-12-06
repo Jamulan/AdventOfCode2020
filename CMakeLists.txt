@@ -33,3 +33,8 @@ add_custom_command(TARGET AoC-06 PRE_BUILD
         COMMAND ${CMAKE_COMMAND} -E copy
         ${CMAKE_SOURCE_DIR}/06/input $<TARGET_FILE_DIR:AoC-06>/)
 
+add_executable(AoC-07 07/main.cpp 07/main.h)
+add_custom_command(TARGET AoC-07 PRE_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy
+        ${CMAKE_SOURCE_DIR}/07/input $<TARGET_FILE_DIR:AoC-07>/)
+
