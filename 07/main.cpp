@@ -42,14 +42,12 @@ int main() {
                 go = n[n.size() - 1] == ','; // bag/bags ,/.
             }
         }
-        if(key != "shiny gold") {
-            rules[key] = rule;
-            keys.push_back(key);
-        }
+        rules[key] = rule;
+        keys.push_back(key);
     }
     int numBags = 0;
     for(string key : keys) {
-        if(rules[key].empty) continue;
+        if(rules[key].empty || key == "shiny gold") continue;
         checkedBags = {};
         vector<string> bags = findInnerBags(key);
         for(string s : bags) {
@@ -59,10 +57,36 @@ int main() {
             }
         }
     }
-    cout << numBags << '\n';
-    printf("hello world");
+    int nestedCount = 0;
+    Rule bags = findNestedCount("shiny gold", 1);
+    for(int i : bags.innerBagNum) {
+        nestedCount += i;
+    }
+    cout << numBags << '\n' << nestedCount << '\n';
 
     return 0;
+}
+
+Rule findNestedCount(string bag, int num) {
+    if(rules[bag].empty) return {};
+    Rule out;
+    out.innerBagCol = rules[bag].innerBagCol;
+    out.innerBagNum = {};
+    for(int i : rules[bag].innerBagNum) {
+        out.innerBagNum.push_back(i * num);
+    }
+    int i = -1;
+    int end = out.innerBagCol.size();
+    while(++i < end) {
+        Rule findInnerOut = findNestedCount(out.innerBagCol[i], out.innerBagNum[i]);
+        for(string s : findInnerOut.innerBagCol) {
+            out.innerBagCol.push_back(s);
+        }
+        for(int j : findInnerOut.innerBagNum) {
+            out.innerBagNum.push_back(j);
+        }
+    }
+    return out;
 }
 
 vector<string> findInnerBags(string bag) {

@@ -21,5 +21,6 @@ unordered_map<string, Rule> rules;
 vector<string> checkedBags;
 
 vector<string> findInnerBags(string bag);
+Rule findNestedCount(string bag, int num);
 
 #endif //ADVENTOFCODE2020_MAIN_H
